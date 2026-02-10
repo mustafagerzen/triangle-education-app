@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle App & AI Tutor</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Triangle App</h1>
+            <p>Interactive Geometry Playground & AI Tutor</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Left Column: Geometry -->
+            <section class="geometry-section">
+                <div class="canvas-container">
+                    <canvas id="triangleCanvas" width="600" height="400"></canvas>
+                </div>
+
+                <div class="controls">
+                    <div class="control-group">
+                        <h3>Sides</h3>
+                        <div class="input-row">
+                            <label>Side a (BC): <input type="number" id="sideA" step="1"></label>
+                            <label>Side b (AC): <input type="number" id="sideB" step="1"></label>
+                            <label>Side c (AB): <input type="number" id="sideC" step="1"></label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h3>Angles (Degrees)</h3>
+                        <div class="input-row">
+                            <label>Angle A: <input type="number" id="angleA" step="0.1" readonly></label>
+                            <label>Angle B: <input type="number" id="angleB" step="0.1" readonly></label>
+                            <label>Angle C: <input type="number" id="angleC" step="0.1" readonly></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Chat -->
+            <section class="chat-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h3>Geometry Tutor</h3>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot">
+                            <div class="bubble">
+                                Hello! I'm your Geometry Tutor. Ask me about the Area, Perimeter, or Type of your
+                                triangle!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Ask a question... (e.g., 'Calculate area')">
+                        <button id="sendMessage">Send</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+
+</html>

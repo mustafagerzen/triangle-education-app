@@ -271,6 +271,85 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+
+    // Geometry Tutor Logic (Client-Side Port)
+    class GeometryTutor {
+        constructor() { }
+
+        solve(query, sides, angles) {
+            query = query.toLowerCase();
+            const { a, b, c } = sides;
+            const { A, B, C } = angles;
+
+            let response = {
+                answer: "",
+                steps: [],
+                rule: ""
+            };
+
+            if (query.includes("area")) {
+                // Heron's Formula
+                const s = (a + b + c) / 2;
+                const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+                response.answer = `The area is ${area.toFixed(2)} square units.`;
+                response.rule = "Heron's Formula: Area = √(s(s-a)(s-b)(s-c)), where s is the semi-perimeter.";
+                response.steps = [
+                    `1. Calculate semi-perimeter s = (${a.toFixed(1)} + ${b.toFixed(1)} + ${c.toFixed(1)}) / 2 = ${s.toFixed(2)}`,
+                    `2. Apply formula: √(${s.toFixed(2)} * (${s.toFixed(2)}-${a.toFixed(1)}) * (${s.toFixed(2)}-${b.toFixed(1)}) * (${s.toFixed(2)}-${c.toFixed(1)}))`,
+                    `3. Result: ${area.toFixed(2)}`
+                ];
+            } else if (query.includes("perimeter")) {
+                const p = a + b + c;
+                response.answer = `The perimeter is ${p.toFixed(2)} units.`;
+                response.rule = "Perimeter = a + b + c";
+                response.steps = [
+                    `1. Sum all sides: ${a.toFixed(1)} + ${b.toFixed(1)} + ${c.toFixed(1)}`,
+                    `2. Result: ${p.toFixed(2)}`
+                ];
+            } else if (query.includes("type")) {
+                // By Side
+                let sideType = "Scalene";
+                const isClose = (x, y) => Math.abs(x - y) < 0.1; // Simple epsilon check
+
+                if (isClose(a, b) && isClose(b, c)) {
+                    sideType = "Equilateral";
+                } else if (isClose(a, b) || isClose(b, c) || isClose(a, c)) {
+                    sideType = "Isosceles";
+                }
+
+                // By Angle
+                let angleType = "Acute";
+                if (isClose(A, 90) || isClose(B, 90) || isClose(C, 90)) {
+                    angleType = "Right";
+                } else if (A > 90 || B > 90 || C > 90) {
+                    angleType = "Obtuse";
+                }
+
+                response.answer = `This is a ${sideType} ${angleType} triangle.`;
+                response.rule = "Classification by sides (Equilateral, Isosceles, Scalene) and angles (Acute, Right, Obtuse).";
+
+                const steps = [];
+                if (sideType === "Equilateral") steps.push("All sides are equal -> Equilateral");
+                else if (sideType === "Isosceles") steps.push("Two sides are equal -> Isosceles");
+                else steps.push("No sides are equal -> Scalene");
+
+                if (angleType === "Right") steps.push("One angle is 90° -> Right");
+                else if (angleType === "Obtuse") steps.push("One angle is > 90° -> Obtuse");
+                else steps.push("All angles are < 90° -> Acute");
+
+                response.steps = steps;
+
+            } else {
+                response.answer = "I can help you calculate the Area, Perimeter, or Type of this triangle. Try asking 'Calculate the area'!";
+                response.rule = "I am a simple geometry bot.";
+            }
+
+            return response;
+        }
+    }
+
+    const tutor = new GeometryTutor();
+
     async function handleChat() {
         const query = chatInput.value.trim();
         if (!query) return;
@@ -282,20 +361,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prepare Geometry Context
         const geo = calculateGeometry();
 
+        // Simulate network delay for better UX
+        await new Promise(r => setTimeout(r, 500));
+
         try {
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    query: query,
-                    sides: geo.sides,
-                    angles: geo.angles
-                })
-            });
-
-            if (!response.ok) throw new Error('Network response was not ok');
-
-            const data = await response.json();
+            // Local processing instead of fetch
+            const data = tutor.solve(query, geo.sides, geo.angles);
 
             // Bot Response
             const extraContainer = document.createElement('div');
