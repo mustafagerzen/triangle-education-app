@@ -1,36 +1,49 @@
 # Triangle Education App
 
 An interactive geometry playground with an AI Tutor.
-Built with **Flask (Python)** and **HTML5 Canvas**.
+Built with **HTML5 Canvas**, **JavaScript**, and **CSS**.
 
-## 🚀 How to Run Locally
+## 🚀 Features
+- **Interactive Triangle**: Drag vertices to change the shape.
+- **Real-time Calculations**: Automatically updates side lengths and angles.
+- **AI Tutor**: Ask questions like "Calculate area" or "What type of triangle is this?" and get instant answers with steps.
+- **Static Site**: Runs entirely in the browser, no backend required.
 
-Since this app uses a Python backend for the AI Tutor logic, it cannot be hosted on GitHub Pages (which only supports static sites). You must run it on a machine with Python installed.
+## 🌐 Live Demo
+You can view the live demo here: [https://mustafagerzen.github.io/triangle-education-app/](https://mustafagerzen.github.io/triangle-education-app/)
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/mustafagerzen/triangle-education-app.git
-cd triangle-education-app
-```
+*(Note: If the link doesn't work, ensure GitHub Pages is enabled in the repository settings)*
 
-### 2. Install Dependencies
-Make sure you have Python installed. Then run:
-```bash
-pip install -r requirements.txt
-```
+## 🛠️ How to Run Locally
 
-### 3. Run the App
-```bash
-python main.py
-```
-*Note: On some systems, you might need to use `python3` instead of `python`.*
+Since this is a static site, you don't need to install Python or any dependencies!
 
-### 4. Open in Browser
-Visit [http://localhost:3000](http://localhost:3000)
+### Option 1: Open Directly
+1.  Clone or download the repository.
+2.  Double-click `index.html` to open it in your web browser.
 
-## 🌐 Deploying to the Web
-To share this as a website link (like `myapp.com`), you cannot use GitHub Pages. You need a platform that supports Python, such as:
-- **Render** (Free tier available)
-- **PythonAnywhere**
-- **Heroku**
-- **Vercel** (requires configuration)
+### Option 2: Local Server (Optional)
+If you prefer running a local server:
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/mustafagerzen/triangle-education-app.git
+    cd triangle-education-app
+    ```
+
+2.  Run with Python's built-in server (just for serving files):
+    ```bash
+    python3 -m http.server
+    ```
+
+3.  Open [http://localhost:8000](http://localhost:8000)
+
+## 📝 GitHub Pages Deployment
+
+To deploy your own version:
+
+1.  Fork this repository.
+2.  Go to **Settings** > **Pages**.
+3.  Under **Build and deployment**, set **Source** to `Deploy from a branch`.
+4.  Select `main` branch and `/ (root)` folder.
+5.  Click **Save**.
